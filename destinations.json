@@ -1,0 +1,77 @@
+[
+  {
+    "id": 1,
+    "season": "summer",
+    "destination": "Kashmir",
+    "places": [
+      {
+        "name": "Shankaracharya Hill",
+        "description": "A beautiful palace in Kashmir known for its architecture.",
+        "opening_hours": "09:00 AM - 05:00 PM"
+      },
+      {
+        "name": "Indira Gandhi Tulip Garden",
+        "description": "A popular garden known for its vibrant atmosphere.",
+        "opening_hours": "24 Hours"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "season": "summer",
+    "destination": "Manali",
+    "places": [
+      {
+        "name": "Rohtang Pass",
+        "description": "A high mountain pass in the Himalayas.",
+        "opening_hours": "Open 24 Hours"
+      },
+      {
+        "name": "Hidimba Devi Temple",
+        "description": "A historic temple dedicated to the goddess Hidimba.",
+        "opening_hours": "08:00 AM - 06:00 PM"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "season": "winter",
+    "destination": "Jaisalmer",
+    "places": [
+      {
+        "name": "Jaisalmer Fort",
+        "description": "A stunning fort with beautiful architecture.",
+        "opening_hours": "09:00 AM - 06:00 PM"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "season": "spring",
+    "destination": "Coorg",
+    "places": [
+      {
+        "name": "Raja's Seat",
+        "description": "A popular viewpoint with stunning views.",
+        "opening_hours": "06:00 AM - 06:00 PM"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "season": "summer",
+    "destination": "Jaipur",
+    "places": [
+      {
+        "name": "HawaMahal",
+        "description": "A new place.",
+        "opening_hours": "10:00 AM - 09:00 PM"
+      },
+      {
+        "name": "valley",
+        "description": "A new place with exciting features.",
+        "opening_hours": "10:00 AM - 08:00 PM"
+      }
+    ]
+  }
+]
