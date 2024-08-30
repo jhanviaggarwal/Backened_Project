@@ -5,28 +5,24 @@ const app = express();
 const port = 3001;
 
 const { readFile, writeFile } = require("./file");
+const usersRouter = require("./users"); // Require users.js
 
 app.use(cors());
 app.use(express.json());
 
-app.use(cors({ origin: "http://localhost:3001" })); 
-
+app.use(cors({ origin: "http://localhost:3001" }));
 
 const itinerariesRouter = require("./itineraries");
+app.use("/users", usersRouter); 
 
 app.use("/itineraries", itinerariesRouter);
 
 app.use(express.static(path.join(__dirname, "public")));
 
-// Serve the HTML file for the root path
-// app.get("/", (req, res) => {
-//   res.sendFile(path.join(__dirname, "public", "index.html"));
-// });
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "itinerary.html"));
 });
-
 
 // Post a new destination with places
 app.post("/destination", (req, res) => {
@@ -90,7 +86,7 @@ app.get("/destinat/:id", (req, res) => {
 app.put("/destinations/:id/places/:placeName", (req, res) => {
   const id = parseInt(req.params.id);
   const placeName = req.params.placeName.toLowerCase();
-  const {name, description, opening_hours } = req.body;
+  const { name, description, opening_hours } = req.body;
   const destinations = readFile();
   const destIndex = destinations.findIndex((dest) => dest.id === id);
 
@@ -142,5 +138,3 @@ app.post("/destinations/:id/places", (req, res) => {
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
-
-

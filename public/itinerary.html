@@ -5,39 +5,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Itinerary Planner</title>
     <style>
-        /* Add some basic styles for layout */
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
-        h1, h2 {
-            color: #333;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        li {
-            padding: 8px;
-            cursor: pointer;
-            border-bottom: 1px solid #ddd;
-        }
-        input[type="text"] {
-            padding: 8px;
-            margin: 10px 0;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
+       body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #000; /* Black background */
+    margin: 0;
+    padding: 20px;
+    color: #fff; /* White text color */
+}
+
+h1, h2 {
+    color: #f5f5f5;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #222;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+li:hover {
+    background-color: #333;
+    transform: translateY(-2px);
+}
+
+input[type="text"] {
+    padding: 12px;
+    margin: 15px 0;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #555;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #333;
+    color: #fff;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+    border-color: #79b3f1;
+    outline: none;
+}
+
+li.button{
+    gap:200px;
+}
+button {
+    padding: 10px 25px;
+    background-color: #79b3f1;
+    color: #fff;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #0e66c4;
+    transform: translateY(-2px);
+}
+
+button:active {
+    background-color: #003f7f;
+    transform: translateY(1px);
+}
+
     </style>
 </head>
 <body>
@@ -264,30 +311,39 @@
         }
 
         // Function to search for an itinerary by ID
-        function searchItineraryById() {
-            const itineraryId = document.getElementById("searchItineraryId").value;
+function searchItineraryById() {
+    const itineraryId = document.getElementById("searchItineraryId").value;
 
-            if (itineraryId.trim() === "") {
-                alert("Please enter a valid Itinerary ID.");
-                return;
-            }
+    if (itineraryId.trim() === "") {
+        alert("Please enter a valid Itinerary ID.");
+        return;
+    }
 
-            fetch(`${baseUrl}/${itineraryId}`)
-            .then((response) => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error("Itinerary not found.");
-                }
-            })
-            .then((itinerary) => {
-                const itinerariesList = document.getElementById("itinerariesList");
-                itinerariesList.innerHTML = `<li>ID: ${itinerary.id} - ${itinerary.name}</li>`;
-            })
-            .catch((error) => {
-                alert(error.message);
-            });
+    fetch(`${baseUrl}/${itineraryId}`)
+    .then((response) => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error("Itinerary not found.");
         }
+    })
+    .then((itinerary) => {
+        const itinerariesList = document.getElementById("itinerariesList");
+        itinerariesList.innerHTML = "";
+
+        // Create a list item for the found itinerary
+        const listItem = document.createElement("li");
+        listItem.textContent = `ID: ${itinerary.id} - ${itinerary.name}`;
+        
+        // Add an onclick event to load destinations when the itinerary is clicked
+        listItem.onclick = () => loadDestinations(itinerary.id, itinerary.name);
+
+        itinerariesList.appendChild(listItem);
+    })
+    .catch((error) => {
+        alert(error.message);
+    });
+}
 
         // Function to go back to the itineraries list
         function goBackToItineraries() {
@@ -296,8 +352,14 @@
             selectedItineraryId = null;
         }
 
+        function goBackToIndex() {
+        window.location.href = 'index.html';
+}
+
+
         // Initial load of itineraries
         loadItineraries();
     </script>
+    <button onclick="goBackToIndex()">Back to Destinations</button>
 </body>
 </html>

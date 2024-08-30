@@ -1,21 +1,51 @@
 [
   {
-    "id": "5221",
+    "id": "2496",
     "name": "SHIMLA",
     "destinations": [
       {
         "id": "1",
-        "name": "abc"
+        "name": "mg road"
       },
       {
-        "id": "2",
-        "name": "xyz"
+        "id": "3",
+        "name": "valley"
       }
     ]
   },
   {
-    "id": "3471",
+    "id": "3305",
+    "name": "2nd trip KASHMIR",
+    "destinations": [
+      {
+        "id": "1",
+        "name": "ladakh"
+      }
+    ]
+  },
+  {
+    "id": "6140",
+    "name": "abc",
+    "destinations": []
+  },
+  {
+    "id": "6166",
     "name": "KASHMIR",
+    "destinations": []
+  },
+  {
+    "id": "3815",
+    "name": "",
+    "destinations": []
+  },
+  {
+    "id": "3719",
+    "name": "",
+    "destinations": []
+  },
+  {
+    "id": "6397",
+    "name": "coorg",
     "destinations": []
   }
 ]
