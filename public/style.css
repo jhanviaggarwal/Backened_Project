@@ -1,3 +1,100 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+main {
+    padding: 20px;
+    /* max-width: 1200px;
+    margin: auto; */
+}
+
+#destinations, #places-container {
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 1200px; /* Ensure content does not stretch too wide */
+}
+
+.place-bar {
+    background-color: #457a51; /* Bar background color */
+    color: white; /* Text color */
+    padding: 10px 0px; /* Space inside the bar */
+    text-align: center; /* Center-align the text */
+    font-size: 24px; /* Font size for the heading */
+    font-weight: bold; /* Bold text */
+    font-family: 'Roboto', sans-serif;
+    border-radius: 2px; /* Rounded corners */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-bottom: 20px; /* Space below the bar */
+    width: 80%; /* Width of the bar */
+    margin: 0 auto 20px auto; /* Center the bar horizontally */
+}
+
+#places-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Align items evenly */
+}
+
+.place-item {
+    background-color: white;
+    border: 1px solid #ddd;
+    margin: 10px;
+    padding: 15px;
+    width: calc(33% - 20px); /* Responsive layout with spacing */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.place-item img {
+        width: 100%;
+        height: 180px; 
+        object-fit: cover; /* to cover the entire button with the image */
+        display: block;
+        margin-bottom: 10px; /*Add space between the image and text*/
+}
+
+.place-item h2, 
+.place-item p {
+    margin: 5px 0; /* Reduce margin to make the spacing uniform */
+}
+
+.place-item h2 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.place-item .place-description {
+    font-size: 16px;
+    color: #555;
+}
+
+.place-item .place-hours {
+    font-size: 14px;
+    color: #777;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Button styles */
 .button:hover {
     transform: scale(1.05); /* Slightly enlarge the button */
     background-color: #3b4a8f; /* Darken the background color */
@@ -190,3 +287,4 @@
     transform: scale(1.05);
     box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15);
 }
+

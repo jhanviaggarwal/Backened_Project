@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Places to Visit</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main>
+        <div class="place-bar">Places to Visit</div>
+        <div id="places-container">
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        // Extract the destination from the query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const destination = urlParams.get('destination');
+
+        // Fetch and display the places for the selected destination
+        if (destination) {
+            fetchPlaces(destination);
+        }
+
+    </script>
+</body>
+
+</html>

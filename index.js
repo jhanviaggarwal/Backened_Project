@@ -5,7 +5,7 @@ const app = express();
 const port = 3001;
 
 const { readFile, writeFile } = require("./file");
-const usersRouter = require("./users"); // Require users.js
+const usersRouter = require("./users"); 
 
 app.use(cors());
 app.use(express.json());
@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "itinerary.html"));
 });
 
-// Post a new destination with places
+// Post a new destination with places  DIYA
 app.post("/destination", (req, res) => {
   const { season, destination, places } = req.body;
 
@@ -44,7 +44,7 @@ app.post("/destination", (req, res) => {
   res.status(201).json(newDest);
 });
 
-// Retrieve destinations for a particular season
+// Retrieve destinations for a particular season  DIYA
 app.get("/destination/:season", (req, res) => {
   const season = req.params.season.toLowerCase();
   const destinations = readFile();
@@ -54,7 +54,50 @@ app.get("/destination/:season", (req, res) => {
   res.status(200).json(selectedDest.map((dest) => dest.destination));
 });
 
-// Retrieve places for a particular destination
+//DIYA
+app.delete('/delete/destinations/:destination',(req,res)=>{
+  const destination = req.params.destination.toLowerCase();
+  const destinations = readFile();
+  for(let i=0; i<destinations.length; i++){
+    if(destinations[i].destination.toLowerCase()==destination){
+      destinations.splice(i,1);
+      writeFile(destinations);
+      res.status(204).send();
+      return;
+    }
+  }
+  res.send(404).send(`${destination} does not exist.`);
+})
+
+//DIYA
+app.put("update/destinations/:destination", (req, res) => {  
+  const destination = req.params.destination.toLowerCase();
+  const destinations = readFile();
+  for (let i = 0; i < destinations.length; i++) {
+    if (destinations[i].destination.toLowerCase() == destination) {
+      destinations[i].destination = req.body.destination;
+      writeFile(destinations);
+      res.status(204).send();
+      return;
+    }
+  }
+  res.send(404).send(`${destination} does not exist.`);
+});
+
+// Retrieve a destination by id   // DIYA
+app.get("/destinat/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const destinations = readFile();
+  const dest = destinations.find((dest) => dest.id === id);
+
+  if (dest) {
+    res.status(200).json(dest);
+  } else {
+    res.status(404).send(`Id ${id} does not exist.`);
+  }
+});
+
+// Retrieve places for a particular destination  //PRAGATI
 app.get("/destinations/:destination", (req, res) => {
   const destination = req.params.destination.toLowerCase();
   const destinations = readFile();
@@ -69,20 +112,7 @@ app.get("/destinations/:destination", (req, res) => {
   }
 });
 
-// Retrieve a destination by id
-app.get("/destinat/:id", (req, res) => {
-  const id = parseInt(req.params.id);
-  const destinations = readFile();
-  const dest = destinations.find((dest) => dest.id === id);
-
-  if (dest) {
-    res.status(200).json(dest);
-  } else {
-    res.status(404).send(`Id ${id} does not exist.`);
-  }
-});
-
-// PUT method to update a place's details
+// PUT method to update a place's details   PRAGATI
 app.put("/destinations/:id/places/:placeName", (req, res) => {
   const id = parseInt(req.params.id);
   const placeName = req.params.placeName.toLowerCase();
@@ -111,7 +141,7 @@ app.put("/destinations/:id/places/:placeName", (req, res) => {
   res.status(200).json(place);
 });
 
-// POST method to add a new place
+// POST method to add a new place //PRAGATI
 app.post("/destinations/:id/places", (req, res) => {
   const id = parseInt(req.params.id);
   const { name, description, opening_hours } = req.body;

@@ -20,7 +20,7 @@ function fetchSeasons() {
     div.className = "season-item";
 
     const image = document.createElement("img");
-    image.src = `./assets/${season.toLowerCase()}1.jpg`;
+    image.src = `/assets/${season.toLowerCase()}1.jpg`; // Updated path
     image.className = "season-image";
 
     const name = document.createElement("div");
@@ -52,7 +52,6 @@ function fetchDestinations(season) {
       destinationContainer.innerHTML = "";
       destinationContainer.appendChild(titleBar);
 
-      //buttons for each destination with a different style
       const buttonContainer = document.createElement("div");
       buttonContainer.className = "button-container";
 
@@ -60,13 +59,13 @@ function fetchDestinations(season) {
         const div = document.createElement("div");
         div.className = "list-item";
 
-        //image element
+        // Image element
         const img = document.createElement("img");
-        img.src = `./assets/${destination.toLowerCase()}.jpg`; // Assuming images are named after destinations
+        img.src = `/assets/${destination.toLowerCase()}.jpg`; // Updated path
         img.alt = destination;
         img.className = "destination-image";
 
-        //text element for the destination name
+        // Text element for the destination name
         const text = document.createElement("p");
         text.innerText = destination;
         text.className = "destination-name";
@@ -76,7 +75,8 @@ function fetchDestinations(season) {
         div.appendChild(text);
 
         // Set onclick event for the div
-        div.onclick = () => fetchPlaces(destination);
+        div.onclick = () =>
+          (window.location.href = `places.html?destination=${destination}`);
 
         // Append the div to the button container
         buttonContainer.appendChild(div);
@@ -86,24 +86,50 @@ function fetchDestinations(season) {
     });
 }
 
-// Fetch and display places to visit for a particular destination
 function fetchPlaces(destination) {
   fetch(`${baseUrl}/destinations/${destination}`)
     .then((response) => response.json())
     .then((places) => {
-      const placesContainer = document.getElementById("places");
-      placesContainer.innerHTML = "<h2>Places to Visit</h2>";
+      const placesContainer = document.getElementById("places-container");
+      placesContainer.innerHTML = ""; // Clear any existing content
+
       places.forEach((place) => {
         const div = document.createElement("div");
-        div.className = "list-item";
-        div.innerHTML = `<strong>${place.name}</strong><br>${place.description}<br>Opening Hours: ${place.opening_hours}`;
+        div.className = "place-item";
+
+        // Create an image element
+        const img = document.createElement("img");
+        const imageUrl = `/assets/${place.name.toLowerCase()}.jpg`; // Updated path
+        console.log(imageUrl);
+        img.src = imageUrl;
+        img.alt = place.name;
+
+        // Create a title element
+        const title = document.createElement("h2");
+        title.innerText = place.name;
+
+        // Create a description element
+        const description = document.createElement("p");
+        description.innerText = place.description;
+
+        // Create an opening hours element
+        const hours = document.createElement("p");
+        hours.innerText = `Opening Hours: ${place.opening_hours}`;
+
+        // Append all elements to the container
+        div.appendChild(img);
+        div.appendChild(title);
+        div.appendChild(description);
+        div.appendChild(hours);
+
         placesContainer.appendChild(div);
       });
+    })
+    .catch((error) => {
+      console.error("Error fetching places:", error);
     });
 }
 
-// Navigate to weather forecast page
 document.getElementById("weather-btn").onclick = () => {
   window.location.href = "weather.html";
 };
-
