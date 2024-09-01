@@ -10,12 +10,21 @@
       {
         "id": "2",
         "name": "MALL ROAD"
+      },
+      {
+        "id": "3",
+        "name": ""
       }
     ]
   },
   {
     "id": "7125",
     "name": "KASHMIR",
+    "destinations": []
+  },
+  {
+    "id": "1664",
+    "name": "",
     "destinations": []
   }
 ]
