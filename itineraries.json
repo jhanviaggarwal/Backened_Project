@@ -1,30 +1,34 @@
 [
   {
-    "id": "4882",
+    "id": "3862",
     "name": "SHIMLA",
     "destinations": [
       {
         "id": "1",
-        "name": "MG ROAD"
-      },
-      {
-        "id": "2",
         "name": "MALL ROAD"
       },
       {
-        "id": "3",
-        "name": ""
+        "id": "2",
+        "name": "KUFRI , HILL STATION"
       }
     ]
   },
   {
-    "id": "7125",
+    "id": "7461",
     "name": "KASHMIR",
-    "destinations": []
-  },
-  {
-    "id": "1664",
-    "name": "",
-    "destinations": []
+    "destinations": [
+      {
+        "id": "1",
+        "name": "VALLEYS"
+      },
+      {
+        "id": "2",
+        "name": "HILLS"
+      },
+      {
+        "id": "3",
+        "name": "LEH PALACE"
+      }
+    ]
   }
 ]

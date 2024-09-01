@@ -165,6 +165,28 @@ app.post("/destinations/:id/places", (req, res) => {
   res.status(201).json(newPlace);
 });
 
+// DELETE a place by destination and place name // PRAGATI
+app.delete("/destinations/:destination/places/:placeName", (req, res) => {
+  const destination = req.params.destination.toLowerCase();
+  const placeName = req.params.placeName.toLowerCase();
+  const destinations = readFile();
+  const destinationIndex = destinations.findIndex(
+    (dest) => dest.destination.toLowerCase() === destination
+  );
+  if (destinationIndex === -1) {
+    return res.status(404).send(`Destination ${destination} not found.`);
+  }
+  const placeIndex = destinations[destinationIndex].places.findIndex(
+    (place) => place.name.toLowerCase() === placeName
+  );
+  if (placeIndex === -1) {
+    return res.status(404).send(`Place ${placeName} not found in ${destination}.`);
+  }
+  destinations[destinationIndex].places.splice(placeIndex, 1);
+  writeFile(destinations);
+  res.status(204).send();
+});
+
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
