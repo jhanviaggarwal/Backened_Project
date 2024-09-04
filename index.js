@@ -70,7 +70,7 @@ app.delete('/delete/destinations/:destination',(req,res)=>{
 })
 
 //DIYA
-app.put("update/destinations/:destination", (req, res) => {  
+app.put("/update/destinations/:destination", (req, res) => {  
   const destination = req.params.destination.toLowerCase();
   const destinations = readFile();
   for (let i = 0; i < destinations.length; i++) {

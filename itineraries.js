@@ -15,7 +15,7 @@ const readItinerariesFile = () => {
     itineraries = JSON.parse(data);
   } catch (error) {
     console.error("Error parsing itineraries file:", error);
-    itineraries = []; // Fallback to an empty array if parsing fails
+    itineraries = []; 
   }
   return Array.isArray(itineraries) ? itineraries : [];
 };
@@ -103,8 +103,7 @@ router.put("/:id/destinations/:destinationId", (req, res) => {
   const itineraries = readItinerariesFile();
   const itinerary = itineraries.find((it) => it.id === req.params.id);
   if (itinerary) {
-    const destinationIndex = itinerary.destinations.findIndex(
-      (dest) => dest.id === req.params.destinationId
+    const destinationIndex = itinerary.destinations.findIndex((dest) => dest.id === req.params.destinationId
     );
     if (destinationIndex !== -1) {
       itinerary.destinations[destinationIndex].name = req.body.name;

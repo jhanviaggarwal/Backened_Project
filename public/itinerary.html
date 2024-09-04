@@ -158,90 +158,7 @@
                 console.error("Error:", error);
             });
         }
-
-        // Function to load all itineraries
-        function loadItineraries() {
-            fetch(baseUrl)
-            .then((response) => response.json())
-            .then((data) => {
-                const itinerariesList = document.getElementById("itinerariesList");
-                itinerariesList.innerHTML = "";
-                data.forEach((itinerary) => {
-                    const listItem = document.createElement("li");
-                    listItem.textContent = `ID: ${itinerary.id} - ${itinerary.name}`;
-
-                    // Container for buttons
-                    const buttonContainer = document.createElement("div");
-                    buttonContainer.className = "button-container";
-
-                    // Edit and Delete buttons for itinerary
-                    const editButton = document.createElement("button");
-                    editButton.textContent = "Edit";
-                    editButton.onclick = () => editItinerary(itinerary.id);
-
-                    const deleteButton = document.createElement("button");
-                    deleteButton.textContent = "Delete";
-                    deleteButton.onclick = () => deleteItinerary(itinerary.id);
-
-                    // Append buttons to container
-                    buttonContainer.appendChild(editButton);
-                    buttonContainer.appendChild(deleteButton);
-
-                    // Append the button container to the list item
-                    listItem.appendChild(buttonContainer);
-                    listItem.id = itinerary.id;
-                    listItem.onclick = () => loadDestinations(itinerary.id, itinerary.name);
-                    itinerariesList.appendChild(listItem);
-                });
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
-        }
-
-        function loadDestinations(itineraryId, itineraryName) {
-    selectedItineraryId = itineraryId;
-    document.getElementById("selectedItineraryName").textContent = itineraryName;
-    document.getElementById("itinerariesList").style.display = "none";
-    document.getElementById("destinationsSection").style.display = "block";
-
-    fetch(`${baseUrl}/${itineraryId}`)
-    .then((response) => response.json())
-    .then((data) => {
-        const destinationsList = document.getElementById("destinationsList");
-        destinationsList.innerHTML = "";
-        data.destinations.forEach((destination) => {
-            const listItem = document.createElement("li");
-            listItem.textContent = `ID: ${destination.id} - ${destination.name}`;
-
-            // Container for buttons
-            const buttonContainer = document.createElement("div");
-            buttonContainer.className = "button-container";
-
-            // Edit button for destination
-            const editButton = document.createElement("button");
-            editButton.textContent = "Edit";
-            editButton.onclick = () => editDestination(destination.id);
-
-            // Delete button for destination
-            const deleteButton = document.createElement("button");
-            deleteButton.textContent = "Delete";
-            deleteButton.onclick = () => deleteDestination(destination.id);
-
-            // Append buttons to container
-            buttonContainer.appendChild(editButton);
-            buttonContainer.appendChild(deleteButton);
-
-            // Append the button container to the list item
-            listItem.appendChild(buttonContainer);
-            listItem.id = destination.id;
-            destinationsList.appendChild(listItem);
-        });
-    })
-    .catch((error) => {
-        console.error("Error:", error);
-    });
-}
+        
         // Function to edit an itinerary
         function editItinerary(itineraryId) {
             const newName = prompt("Enter new name for the itinerary:");
@@ -339,6 +256,90 @@
                 });
             }
         }
+
+        //Function to load all itineraries
+        function loadItineraries() {
+            fetch(baseUrl)
+            .then((response) => response.json())
+            .then((data) => {
+                const itinerariesList = document.getElementById("itinerariesList");
+                itinerariesList.innerHTML = "";
+                data.forEach((itinerary) => {
+                    const listItem = document.createElement("li");
+                    listItem.textContent = `ID: ${itinerary.id} - ${itinerary.name}`;
+
+                    // Container for buttons
+                    const buttonContainer = document.createElement("div");
+                    buttonContainer.className = "button-container";
+
+                    // Edit and Delete buttons for itinerary
+                    const editButton = document.createElement("button");
+                    editButton.textContent = "Edit";
+                    editButton.onclick = () => editItinerary(itinerary.id);
+
+                    const deleteButton = document.createElement("button");
+                    deleteButton.textContent = "Delete";
+                    deleteButton.onclick = () => deleteItinerary(itinerary.id);
+
+                    // Append buttons to container
+                    buttonContainer.appendChild(editButton);
+                    buttonContainer.appendChild(deleteButton);
+
+                    // Append the button container to the list item
+                    listItem.appendChild(buttonContainer);
+                    listItem.id = itinerary.id;
+                    listItem.onclick = () => loadDestinations(itinerary.id, itinerary.name);
+                    itinerariesList.appendChild(listItem);
+                });
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+        }
+
+        function loadDestinations(itineraryId, itineraryName) {
+    selectedItineraryId = itineraryId;
+    document.getElementById("selectedItineraryName").textContent = itineraryName;
+    document.getElementById("itinerariesList").style.display = "none";
+    document.getElementById("destinationsSection").style.display = "block";
+
+    fetch(`${baseUrl}/${itineraryId}`)
+    .then((response) => response.json())
+    .then((data) => {
+        const destinationsList = document.getElementById("destinationsList");
+        destinationsList.innerHTML = "";
+        data.destinations.forEach((destination) => {
+            const listItem = document.createElement("li");
+            listItem.textContent = `ID: ${destination.id} - ${destination.name}`;
+
+            // Container for buttons
+            const buttonContainer = document.createElement("div");
+            buttonContainer.className = "button-container";
+
+            // Edit button for destination
+            const editButton = document.createElement("button");
+            editButton.textContent = "Edit";
+            editButton.onclick = () => editDestination(destination.id);
+
+            // Delete button for destination
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete";
+            deleteButton.onclick = () => deleteDestination(destination.id);
+
+            // Append buttons to container
+            buttonContainer.appendChild(editButton);
+            buttonContainer.appendChild(deleteButton);
+
+            // Append the button container to the list item
+            listItem.appendChild(buttonContainer);
+            listItem.id = destination.id;
+            destinationsList.appendChild(listItem);
+        });
+    })
+    .catch((error) => {
+        console.error("Error:", error);
+    });
+}
 
         // Function to go back to the itineraries list
         function goBackToItineraries() {
