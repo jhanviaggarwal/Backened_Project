@@ -54,35 +54,65 @@ app.get("/destination/:season", (req, res) => {
   res.status(200).json(selectedDest.map((dest) => dest.destination));
 });
 
-//DIYA
-app.delete('/delete/destinations/:destination',(req,res)=>{
-  const destination = req.params.destination.toLowerCase();
+
+app.delete('/destinations/:id',(req,res)=>{
+  const id = parseInt(req.params.id);
   const destinations = readFile();
   for(let i=0; i<destinations.length; i++){
-    if(destinations[i].destination.toLowerCase()==destination){
+    if(destinations[i].id===id){
       destinations.splice(i,1);
       writeFile(destinations);
       res.status(204).send();
       return;
     }
   }
-  res.send(404).send(`${destination} does not exist.`);
+  res.send(404).send(`${id} does not exist.`);
 })
 
-//DIYA
-app.put("/update/destinations/:destination", (req, res) => {  
-  const destination = req.params.destination.toLowerCase();
+app.put('/destinations/:id',(req,res)=>{
+  const id = parseInt(req.params.id);
   const destinations = readFile();
   for (let i = 0; i < destinations.length; i++) {
-    if (destinations[i].destination.toLowerCase() == destination) {
+    if (destinations[i].id === id) {
       destinations[i].destination = req.body.destination;
       writeFile(destinations);
       res.status(204).send();
       return;
     }
   }
-  res.send(404).send(`${destination} does not exist.`);
-});
+  res.status(404).send(`${id} does not exist.`);
+})
+
+
+//DIYA
+// app.delete('/delete/destinations/:destination',(req,res)=>{
+//   const destination = req.params.destination.toLowerCase();
+//   const destinations = readFile();
+//   for(let i=0; i<destinations.length; i++){
+//     if(destinations[i].destination.toLowerCase()==destination){
+//       destinations.splice(i,1);
+//       writeFile(destinations);
+//       res.status(204).send();
+//       return;
+//     }
+//   }
+//   res.send(404).send(`${destination} does not exist.`);
+// })
+
+//DIYA
+// app.put("/update/destinations/:destination", (req, res) => {  
+//   const destination = req.params.destination.toLowerCase();
+//   const destinations = readFile();
+//   for (let i = 0; i < destinations.length; i++) {
+//     if (destinations[i].destination.toLowerCase() == destination) {
+//       destinations[i].destination = req.body.destination;
+//       writeFile(destinations);
+//       res.status(204).send();
+//       return;
+//     }
+//   }
+//   res.send(404).send(`${destination} does not exist.`);
+// });
 
 // Retrieve a destination by id   // DIYA
 app.get("/destinat/:id", (req, res) => {
